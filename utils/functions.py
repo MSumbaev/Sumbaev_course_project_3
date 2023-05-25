@@ -18,6 +18,7 @@ def get_last_executed_operations(operations, number_of_operations=5):
     :param number_of_operations - количество последних операций (по умолчанию 5).
     """
     # operations_executed = [operation for operation in operations if operation["state"] == "EXECUTED"]
+
     operations_executed = []
 
     for operation in operations:
@@ -30,7 +31,7 @@ def get_last_executed_operations(operations, number_of_operations=5):
     return last_operations
 
 
-def get_format_data(operation):
+def get_format_date(operation):
     """Возвращает дату операции в виде: 'число.месяц.год'."""
 
     date_list = operation["date"].split("T")[0].split("-")
@@ -80,8 +81,8 @@ def get_operation_amount(operation):
     return f'{operation["operationAmount"]["amount"]} {operation["operationAmount"]["currency"]["name"]}'
 
 
-def print_formatted_operations(operations):
-    """Выводит на экран операции.
+def get_formatted_operations(operations):
+    """Возвращает список элементов, где каждый элемент содержит форматированную строку об операции.
     Пример вывода для одной операции:
 
         14.10.2018 Перевод организации
@@ -89,13 +90,24 @@ def print_formatted_operations(operations):
         82771.72 руб.
 
     """
+    result = []
+
     for operation in operations:
-        format_date = get_format_data(operation)
+        format_date = get_format_date(operation)
         description = get_description(operation)
         formatted_bank_accounts = get_formatted_bank_accounts(operation)
         operation_amount = get_operation_amount(operation)
 
-        print(format_date, description)
-        print(formatted_bank_accounts)
-        print(operation_amount)
-        print()
+        result.append(format_date + " " + description + "\n" + formatted_bank_accounts
+                      + "\n" + operation_amount + "\n")
+
+    return result
+
+operations = load_data(PATH)
+
+needed_operations = get_last_executed_operations(operations, 1)
+
+result = get_formatted_operations(needed_operations)
+
+for operation in result:
+    print(operation)
