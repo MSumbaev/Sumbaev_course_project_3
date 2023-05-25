@@ -1,7 +1,5 @@
 import json
 
-PATH = "/home/msumbaev/PycharmProjects/Sumbaev_course_project_3/data/operations.json"
-
 
 def load_data(path):
     """Возвращает информацию из фа йла.json.
@@ -102,12 +100,3 @@ def get_formatted_operations(operations):
                       + "\n" + operation_amount + "\n")
 
     return result
-
-operations = load_data(PATH)
-
-needed_operations = get_last_executed_operations(operations, 1)
-
-result = get_formatted_operations(needed_operations)
-
-for operation in result:
-    print(operation)
