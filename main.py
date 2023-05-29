@@ -2,13 +2,14 @@ from utils.functions import *
 
 def main():
     # Записываем в константу путь к данным
-    PATH = "/home/msumbaev/PycharmProjects/Sumbaev_course_project_3/data/operations.json"
+    PATH = "data/operations.json"
+    COUNT_OPERATIONS = 5
 
     # записываем данные об операциях в переменную
     operations = load_data(PATH)
 
     # Записываем в переменную 5 (заданы по умолчанию вторым аргументом) последних выполненных операций
-    required_operations = get_last_executed_operations(operations)
+    required_operations = get_last_executed_operations(operations, number_of_operations=COUNT_OPERATIONS)
 
     # Записываем в переменную список строк
     # с отформатированной для вывода информацией по операциям
