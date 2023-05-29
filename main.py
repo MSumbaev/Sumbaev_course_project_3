@@ -2,7 +2,7 @@ from utils.functions import *
 
 def main():
     # Записываем в константу путь к данным
-    PATH = "/home/msumbaev/PycharmProjects/Sumbaev_course_project_3/data/operations.json"
+    PATH = "data/operations.json"
 
     # записываем данные об операциях в переменную
     operations = load_data(PATH)
